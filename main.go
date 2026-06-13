@@ -1,5 +1,15 @@
 package main
 
+import (
+	"time"
+
+	"github.com/AFEScalante/pokedexcli/internal/pokeapi"
+)
+
 func main() {
-	startREPL()
+	pokeClient := pokeapi.NewClient(5 * time.Second)
+    cfg := &config{
+		pokeapiClient: pokeClient,
+	}
+	startREPL(cfg)
 }
