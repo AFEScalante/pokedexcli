@@ -9,8 +9,13 @@ import (
 	"github.com/AFEScalante/pokedexcli/internal/pokeapi"
 )
 
+type Pokedex struct {
+	data map[string]pokeapi.Pokemon
+}
+
 type config struct {
 	pokeapiClient pokeapi.Client
+	pokedex Pokedex
 	nextLocationURL *string
 	prevLocationURL *string
 }
@@ -76,8 +81,23 @@ func getCommands() map[string]cliCommand {
 		},
 		"explore": {
 			name: "explore",
-			description: "Explore a specific area",
+			description: "Explore a specific <area_name>",
 			callback: commandExplore,
+		},
+		"catch": {
+			name: "catch",
+			description: "Catch a Pokemon by <pokemon_name>",
+			callback: commandCatch,
+		},
+		"inspect": {
+			name: "inspect",
+			description: "Inspect pokemon availables in Pokedex",
+			callback: commandInspect,
+		},
+		"pokedex": {
+			name: "pokedex",
+			description: "Print your pokedex",
+			callback: commandPokedex,
 		},
 		"help": {
 			name: "help",
